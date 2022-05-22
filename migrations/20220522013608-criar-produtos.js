@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       valor: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       }
     });
   },

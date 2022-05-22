@@ -15,4 +15,8 @@ const Produto = connection.define('produtos',{
       valor: {
         type: Sequelize.INTEGER
       }
-})
+});
+
+Produto.sync({force:false}).then(()=>{});
+
+module.exports = Produto;
