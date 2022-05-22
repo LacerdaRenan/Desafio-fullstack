@@ -2,18 +2,13 @@ const connection = require('../database');
 const Sequelize = require('sequelize');
 
 const Produto = connection.define('produtos',{
-    id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
-      },
       nome: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       valor: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT,
+        allowNull: false
       }
 });
 
