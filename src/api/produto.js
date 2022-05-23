@@ -7,23 +7,27 @@ router.get('/produto/:id?', (req,res)=>{
     const id = req.params.id;
 
     if(id){
-        Produto.findByPk(id).then((data)=>{
-            if(data){
-                res.status(200);
-                res.json(data);
-            }else{
-                res.sendStatus(404);
-            }
-        }).catch(()=>res.sendStatus(500));
+        Produto.findByPk(id)
+            .then((data)=>{
+                if(data){
+                    res.status(200);
+                    res.json(data);
+                }else{
+                    res.sendStatus(404);
+                }
+            })
+            .catch(()=>res.sendStatus(500));
     }else{
-        Produto.findAll().then((data)=>{
-            if(data){
-                res.status(200);
-                res.json(data);
-            }else{
-                res.sendStatus(404);
-            }
-        }).catch(()=>res.sendStatus(500));
+        Produto.findAll()
+            .then((data)=>{
+                if(data){
+                    res.status(200);
+                    res.json(data);
+                }else{
+                    res.sendStatus(404);
+                }
+            })
+            .catch(()=>res.sendStatus(500));
     }
 });
 
@@ -55,17 +59,21 @@ router.put('/produto/:id', (req,res)=>{
      * Verificar se valor do produto é numérico
      */
 
-    Produto.findByPk(id).then(data=>{
-        if(data){
-            Produto.update(
-                {
-                    nome: nome,
-                    valor: valor
-                },
-                {where: {id:id}}
-            ).then(()=>res.sendStatus(200)).catch(()=>res.sendStatus(500))
+    Produto.findByPk(id)
+        .then(data=>{
+            if(data){
+                Produto.update(
+                    {
+                        nome: nome,
+                        valor: valor
+                    },
+                    {where: {id:id}}
+                )
+                .then(()=>res.sendStatus(200))
+                .catch(()=>res.sendStatus(500))
         }
-    }).catch(()=>sendStatus(404));
+        })
+        .catch(()=>sendStatus(404));
 });
 
 router.delete('/produto/:id', (req,res)=>{
@@ -75,9 +83,9 @@ router.delete('/produto/:id', (req,res)=>{
         where: {
             id:id
         }
-    }).then(()=>res.sendStatus(200).catch(res.sendStatus(400)))
+    })
+    .then(()=>res.sendStatus(200)
+    .catch(res.sendStatus(400)))
 });
-
-
 
 module.exports = router;
