@@ -1,4 +1,5 @@
 const {Router} = require('express');
+const { sendStatus } = require('express/lib/response');
 const Produto = require('../database/models/Produto');
 const router = Router();
 
@@ -28,8 +29,24 @@ router.post('/produto', (req,res)=>{
     }).then(()=>{
         res.sendStatus(201);
     }).catch(e=>res.status(500).send('Error'));
-
 });
+
+router.put('/produto/:id', (req,res)=>{
+    const id = req.params.id;
+    const {nome, valor} = req.body
+
+    Produto.findByPk(id).then(data=>{
+        if(data){
+            Produto.update(
+                {
+                    nome: nome,
+                    valor: valor
+                },
+                {where: {id:id}}
+            ).then(()=>res.sendStatus(200)).catch(()=>res.sendStatus(500))
+        }
+    }).catch(()=>sendStatus(404));
+})
 
 
 
