@@ -1,6 +1,7 @@
 const {Router} = require('express');
 const {Op} = require('sequelize');
 const Users = require('../database//models/Users');
+const jwt = require('jsonwebtoken');
 const router = Router();
 
 router.post('/create-user', (req,res)=>{
@@ -34,9 +35,16 @@ router.post('/login', (req,res)=>{
         }
     }).then(data=>{
         if(data){
+
+            const token = jwt.sign({
+                id_user: data.id,
+                email: data.email
+            }, '12345678', {expiresIn: 300});
+
             res.status(202).send([
+                {msg:'Usuario logado'},
                 {data},
-                {msg:'Usuario logado'}
+                {token}
             ])
         }else{
             res.status(401).send({

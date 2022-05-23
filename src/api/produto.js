@@ -2,9 +2,10 @@ const {Router} = require('express');
 const { sendStatus } = require('express/lib/response');
 const Produto = require('../database/models/Produto');
 const Users  =require('../database/models/Users');
+const authenticate = require('../../middlewares/authenticate');
 const router = Router();
 
-router.get('/produto/:id?', (req,res)=>{
+router.get('/produto/:id?', authenticate, (req,res)=>{
     const id = req.params.id;
 
     if(id){
