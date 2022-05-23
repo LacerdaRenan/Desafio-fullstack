@@ -1,6 +1,7 @@
 const {Router} = require('express');
 const { sendStatus } = require('express/lib/response');
 const Produto = require('../database/models/Produto');
+const Users  =require('../database/models/Users');
 const router = Router();
 
 router.get('/produto/:id?', (req,res)=>{
