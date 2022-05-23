@@ -7,6 +7,7 @@ const router = Router();
 
 router.get('/produto/:id?', authenticate, (req,res)=>{
     const id = req.params.id;
+    const user = req.user;
 
     if(id){
         Produto.findByPk(id)
@@ -24,7 +25,7 @@ router.get('/produto/:id?', authenticate, (req,res)=>{
             .then((data)=>{
                 if(data){
                     res.status(200);
-                    res.json(data);
+                    res.json({user, data});
                 }else{
                     res.sendStatus(404);
                 }
