@@ -40,7 +40,7 @@ router.post('/produto', async(req,res)=>{
 
     try{
         
-        if(!(await Produto.findOne({where: {nome:nome}}))) return res.sendStatus(409)
+        if((await Produto.findOne({where: {nome:nome}}))) return res.sendStatus(409)
         
         const newProduct = await Produto.create({nome:nome, valor:valor});
         res.status(201).json({newProduct});
