@@ -11,6 +11,7 @@ const Estoque = connection.define('estoques',{
 
 Produto.hasOne(Estoque);
 Estoque.belongsTo(Produto,{
+    constraint: true,
     foreingKey: 'produtoId'
 })
 
