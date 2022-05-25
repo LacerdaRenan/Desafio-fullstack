@@ -4,55 +4,38 @@ const Users = require('../database//models/Users');
 const jwt = require('jsonwebtoken');
 const router = Router();
 
-router.post('/create-user', (req,res)=>{
+router.post('/create-user', async(req,res)=>{
     const {email,password} = req.body;
-
-    Users.findOne({
-        where: {
-            email:email
-        }
-    }).then(data=>{
-        if(data){
-            res.sendStatus(401);
-        }else{
-            Users.create({
-                email:email,
-                password:password
-            }).then(()=>res.sendStatus(201)).catch((e)=>res.send(e));
-        }
-    }).catch(e=>{res.send(e)});
+    try{
+        if(await Users.findOne({where:{email:email}})) return res.sendStatus(409);
+        await Users.create({
+            email:email,
+            password:password
+        });
+        return res.sendStatus(201);
+    }catch(err){
+        return res.status(500).send(err);
+    }
 })
 
-router.post('/login', (req,res)=>{
+router.post('/login', async(req,res)=>{
     const {email, password} = req.body;
+    try{
 
-    Users.findOne({
-        where: {
-            [Op.and]:[
-                {email:email},
-                {password:password}
-            ]
-        }
-    }).then(data=>{
-        if(data){
+        const user = await Users.findOne({where: {[Op.and]:[{email:email},{password:password}]}});
 
-            const token = jwt.sign({
-                id_user: data.id,
-                email: data.email
-            }, '12345678', {expiresIn: 300});
+        if(!user) return res.sendStatus(401);
 
-            res.status(202).send([
-                {msg:'Usuario logado'},
-                {data},
-                {token}
-            ])
-        }else{
-            res.status(401).send({
-                msg: 'Dados incorretos'
-            })
-        }
-    }).catch(e=>res.send(e));
+        const token = jwt.sign({
+            id_user: user.id,
+            email: user.email
+        }, '12345678', {expiresIn: 600});
 
+        return res.status(202).send([{user},{token}])
+
+    }catch(err){
+        return res.status(500).send(err);
+    }
 });
 
 module.exports=router;
