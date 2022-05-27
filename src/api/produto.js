@@ -40,11 +40,8 @@ router.post('/produto', async(req,res)=>{
         return sendStatus(400)
     }
 
-    const avatar = `https://source.unsplash.com/150x150/?${nome}`
-    
     try{
-        if((await Produto.findOne({where: {nome:nome}}))) return res.sendStatus(409)
-        
+        const avatar = `https://source.unsplash.com/150x150/?${nome}`
         const newProduct = await Produto.create({nome:nome, valor:valor, avatar:avatar});
         res.status(201).json({newProduct});
 
@@ -54,9 +51,12 @@ router.post('/produto', async(req,res)=>{
 
 });
 
+//Rota testada
 router.put('/produto/:id', async(req,res)=>{
     const id = req.params.id;
     const {nome, valor} = req.body
+
+    if(!id) return res.sendStatus(400);
 
     if(!(valor && nome)) return res.sendStatus(400)
 
@@ -80,6 +80,7 @@ router.put('/produto/:id', async(req,res)=>{
 
 });
 
+//Rota testada
 router.delete('/produto/:id', async(req,res)=>{
     const id = req.params.id;
 
