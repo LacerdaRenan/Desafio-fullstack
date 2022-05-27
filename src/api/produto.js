@@ -4,6 +4,7 @@ const Produto = require('../database/models/Produto');
 const authenticate = require('../../middlewares/authenticate');
 const router = Router();
 
+//Rota testada
 router.get('/produto/:id?', async(req,res)=>{
     const id = req.params.id;
     const user = req.user;
@@ -29,6 +30,7 @@ router.get('/produto/:id?', async(req,res)=>{
 
 });
 
+//Rota testada
 router.post('/produto', async(req,res)=>{
     let{nome, valor} = req.body;
 
