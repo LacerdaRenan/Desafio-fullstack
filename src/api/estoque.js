@@ -31,7 +31,7 @@ router.get('/estoque-produto/:produtoId?', async(req,res)=>{
     }
 })
 
-router.post('/estoque', authenticate, async(req,res)=>{
+router.post('/estoque', async(req,res)=>{
     const {produtoId,valor} = req.body;
     if(!(produtoId && valor)) return res.status(400).json({msg:'Valores inválidos'})
 
@@ -67,7 +67,7 @@ router.put('/estoque', async(req,res)=>{
 
 })
 
-router.delete('/estoque/:id', authenticate, async(req,res)=>{
+router.delete('/estoque/:id', async(req,res)=>{
     const id = req.params.id;
 
     if(!id) return res.sendStatus(400);

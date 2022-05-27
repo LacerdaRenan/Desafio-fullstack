@@ -3,6 +3,7 @@ const apiProduto = require('./api/produto');
 const connection = require('./database/database');
 const apiUsers = require('./api/usuario');
 const apiEstoque = require('./api/estoque');
+const cors = require('cors');
 const app = express();
 
 connection.authenticate()
@@ -12,6 +13,7 @@ connection.authenticate()
 
 app.use(express.urlencoded({extended:false}))
 app.use(express.json());
+app.use(cors());
 
 app.use('/', apiProduto);
 app.use('/', apiUsers);

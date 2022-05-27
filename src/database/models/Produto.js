@@ -9,6 +9,9 @@ const Produto = connection.define('produtos',{
       valor: {
         type: Sequelize.FLOAT,
         allowNull: false
+      },
+      avatar: {
+        type: Sequelize.STRING
       }
 });
 

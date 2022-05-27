@@ -4,7 +4,7 @@ const Produto = require('../database/models/Produto');
 const authenticate = require('../../middlewares/authenticate');
 const router = Router();
 
-router.get('/produto/:id?', authenticate, async(req,res)=>{
+router.get('/produto/:id?', async(req,res)=>{
     const id = req.params.id;
     const user = req.user;
 
@@ -30,19 +30,20 @@ router.get('/produto/:id?', authenticate, async(req,res)=>{
 });
 
 router.post('/produto', async(req,res)=>{
-    let{nome, valor} = req.body
+    let{nome, valor} = req.body;
 
     if(!(valor && nome)) return res.sendStatus(400)
-
+    
     if(isNaN(valor)){
         return sendStatus(400)
     }
 
+    const avatar = `https://source.unsplash.com/150x150/?${nome}`
+    
     try{
-        
         if((await Produto.findOne({where: {nome:nome}}))) return res.sendStatus(409)
         
-        const newProduct = await Produto.create({nome:nome, valor:valor});
+        const newProduct = await Produto.create({nome:nome, valor:valor, avatar:avatar});
         res.status(201).json({newProduct});
 
     }catch(err){
