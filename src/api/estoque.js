@@ -45,10 +45,11 @@ router.post('/estoque', async(req,res)=>{
 
 });
 
-router.put('/estoque', async(req,res)=>{
-    const {produtoId, valor} = req.body;
+router.put('/estoque/:produtoId', async(req,res)=>{
+    const {valor} = req.body;
+    const {produtoId} = req.params;
 
-    if(!(produtoId && valor)) return res.status(400).json({mesg:'Valores inválidos'});
+    if((valor==undefined)) return res.sendStatus(400);
 
     try{
         await Estoque.update(
@@ -67,13 +68,13 @@ router.put('/estoque', async(req,res)=>{
 
 })
 
-router.delete('/estoque/:id', async(req,res)=>{
-    const id = req.params.id;
+router.delete('/estoque/:produtoId', async(req,res)=>{
+    const {produtoId} = req.params
 
-    if(!id) return res.sendStatus(400);
+    if(!produtoId) return res.sendStatus(400);
 
     try{
-        await Estoque.destroy({where:{id:id}});
+        await Estoque.destroy({where:{produtoId:produtoId}});
         return res.sendStatus(200);
     }catch(err){
         return res.status(500).json(err)
