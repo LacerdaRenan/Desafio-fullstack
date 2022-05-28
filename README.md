@@ -8,9 +8,12 @@ Update
 Leitura
 Deleção
 
-### API eSTOQUE
+### API ESTOQUE
 Criação
 Update
 Leitura
 Deleção
+
+### BANCO DE DADOS
+Relação produto x estoque 1:1
 
