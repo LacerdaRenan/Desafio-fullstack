@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.center {
+  text-align: center;
+  margin: auto;
+  display: block;
+  margin-top: 1%;
+}
+
+.myform{
+  margin-left: 1px;
+}
+
+.inline{
+  display: inline;
+  margin-left: 1%;
+}
