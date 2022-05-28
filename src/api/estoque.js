@@ -69,9 +69,7 @@ router.put('/estoque/:produtoId', async(req,res)=>{
 })
 
 router.delete('/estoque/:produtoId', async(req,res)=>{
-    const {produtoId} = req.params
-
-    if(!produtoId) return res.sendStatus(400);
+    const {produtoId} = req.params;
 
     try{
         await Estoque.destroy({where:{produtoId:produtoId}});

@@ -37,7 +37,7 @@ router.post('/produto', async(req,res)=>{
     if(!(valor && nome)) return res.sendStatus(400)
     
     if(isNaN(valor)){
-        return sendStatus(400)
+        return res.sendStatus(400)
     }
 
     try{
