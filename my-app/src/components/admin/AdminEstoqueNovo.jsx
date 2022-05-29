@@ -12,7 +12,11 @@ function AdminEstoqueNovo(){
             valor: e.target.quantidade.value
         }
 
-        axios.post('http://localhost:5000/estoque',estoque)
+        axios.post('http://localhost:5000/estoque',estoque,{
+            headers:{
+                authorization: localStorage.getItem('token')
+            }
+        })
             .then(()=>{e.target.submit()})
             .catch(err=>{alert('Não foi possível concluir o cadastro, já existe estoque cadastrado para esse produto!')})
         //
@@ -21,7 +25,11 @@ function AdminEstoqueNovo(){
     let[posts, setPosts] = useState([]);
  
     useEffect(()=>{
-        axios.get('http://localhost:5000/produto')
+        axios.get('http://localhost:5000/produto',{
+            headers:{
+                authorization: localStorage.getItem('token')
+            }
+        })
         .then(data=>{setPosts(data.data)})
         .catch(err=>{console.log(err)})
     }, [])

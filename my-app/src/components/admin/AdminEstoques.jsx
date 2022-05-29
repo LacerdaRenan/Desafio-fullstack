@@ -11,7 +11,11 @@ function AdminEstoques(){
 
         if(!window.confirm('Deseja apagar produto?')) return;
 
-        axios.delete(`http://localhost:5000/estoque/${produtoId}`)
+        axios.delete(`http://localhost:5000/estoque/${produtoId}`,{
+            headers:{
+                authorization: localStorage.getItem('token')
+            }
+        })
             .then(()=>{e.target.submit()})
             .catch(err=>{console.log(err)});
         //

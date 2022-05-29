@@ -5,7 +5,7 @@ const Estoque = require('../database/models/Estoque');
 const authenticate = require('../../middlewares/authenticate');
 const router = Router();
 
-router.get('/estoque-produto/:produtoId?', authenticate, async(req,res)=>{
+router.get('/estoque-produto/:produtoId?', async(req,res)=>{
     const produtoId = req.params.produtoId;
 
     if(produtoId){

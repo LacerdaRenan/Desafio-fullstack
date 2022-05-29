@@ -13,7 +13,11 @@ function AdminEstoqueEditar(){
             valor: e.target.quantidade.value
         }
 
-        axios.put(`http://localhost:5000/estoque/${produtoId}`,estoque)
+        axios.put(`http://localhost:5000/estoque/${produtoId}`,estoque,{
+            headers:{
+                authorization: localStorage.getItem('token')
+            }
+        })
             .then(()=>{e.target.submit()})
             .catch(err=>{alert('Não foi possível atualizar estoque')})
         //
