@@ -10,7 +10,7 @@ function NavBar(){
                     <Link className='nav-link' to='/'>Home</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className='nav-link' to='/admin/produtos'>Admin</Link>
+                    <Link className='nav-link' to='/admin/login'>Admin</Link>
                 </li>
             </ul>
         </nav>

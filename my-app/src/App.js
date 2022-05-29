@@ -1,5 +1,7 @@
 import './App.css';
 import Home from './components/Home';
+import Login from './components/Login';
+import NewUser from './components/NewUser';
 import AdminProdutos from './components/admin/AdminProdutos';
 import AdminEstoques from './components/admin/AdminEstoques';
 import AdminProdutoNovo from './components/admin/AdminProdutoNovo';
@@ -15,6 +17,8 @@ function App() {
       <Router>
         <Routes>
           <Route exact path='/' element={<Home/>}></Route>
+          <Route path='/admin/login' element={<Login/>}></Route>
+          <Route path='/admin/create-user' element={<NewUser/>}></Route>
           <Route path='/admin/produtos' element={<AdminProdutos/>}></Route>
           <Route path='/admin/estoques' element={<AdminEstoques/>}></Route>
           <Route path='/admin/produtos/novo' element={<AdminProdutoNovo/>}></Route>

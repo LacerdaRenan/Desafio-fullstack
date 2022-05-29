@@ -7,7 +7,6 @@ const router = Router();
 router.post('/create-user', async(req,res)=>{
     const {email,password} = req.body;
     try{
-        if(await Users.findOne({where:{email:email}})) return res.sendStatus(409);
         await Users.create({
             email:email,
             password:password
@@ -31,7 +30,7 @@ router.post('/login', async(req,res)=>{
             email: user.email
         }, '12345678', {expiresIn: 600});
 
-        return res.status(202).send([{user},{token}])
+        return res.status(202).json(token)
 
     }catch(err){
         return res.status(500).send(err);
