@@ -11,7 +11,11 @@ function AdminProdutoNovo(){
             valor: e.target.valor.value
         }
         
-        axios.post("http://localhost:5000/produto",novoProduto)
+        axios.post("http://localhost:5000/produto",novoProduto,{
+            headers:{
+                authorization: localStorage.getItem('token')
+            }
+        })
             .then(()=>{e.target.submit()})
             .catch(err=>{return alert('Não foi possível concluir o cadastro')})
         //

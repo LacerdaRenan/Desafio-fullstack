@@ -14,7 +14,11 @@ function AdminProdutoEditar(){
             valor: e.target.valor.value
         }
         
-        axios.put(`http://localhost:5000/produto/${produtoId}`,produtoAtualizado)
+        axios.put(`http://localhost:5000/produto/${produtoId}`,produtoAtualizado,{
+            headers:{
+                authorization: localStorage.getItem('token')
+            }
+        })
         .then(()=>{e.target.submit()})
         .catch(err=>{return alert('Não foi possível concluir a edição')})
         //
@@ -23,7 +27,11 @@ function AdminProdutoEditar(){
     let[posts, setPosts] = useState([]);
     
     useEffect(()=>{
-        axios.get(`http://localhost:5000/produto/${produtoId}`)
+        axios.get(`http://localhost:5000/produto/${produtoId}`,{
+            headers:{
+                authorization: localStorage.getItem('token')
+            }
+        })
         .then(data=>{setPosts(data.data)})
         .catch(err=>{console.log(err)})
     }, [produtoId]);

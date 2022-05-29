@@ -5,7 +5,7 @@ const authenticate = require('../../middlewares/authenticate');
 const router = Router();
 
 //Rota testada
-router.get('/produto/:id?', async(req,res)=>{
+router.get('/produto/:id?',authenticate, async(req,res)=>{
     const id = req.params.id;
     const user = req.user;
 
@@ -31,7 +31,7 @@ router.get('/produto/:id?', async(req,res)=>{
 });
 
 //Rota testada
-router.post('/produto', async(req,res)=>{
+router.post('/produto',authenticate, async(req,res)=>{
     let{nome, valor} = req.body;
 
     if(!(valor && nome)) return res.sendStatus(400)
@@ -52,7 +52,7 @@ router.post('/produto', async(req,res)=>{
 });
 
 //Rota testada
-router.put('/produto/:id', async(req,res)=>{
+router.put('/produto/:id',authenticate, async(req,res)=>{
     const id = req.params.id;
     const {nome, valor} = req.body
 
@@ -81,7 +81,7 @@ router.put('/produto/:id', async(req,res)=>{
 });
 
 //Rota testada
-router.delete('/produto/:id', async(req,res)=>{
+router.delete('/produto/:id',authenticate, async(req,res)=>{
     const id = req.params.id;
 
     if(!id) return res.sendStatus(400)

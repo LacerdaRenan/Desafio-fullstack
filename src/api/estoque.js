@@ -5,7 +5,7 @@ const Estoque = require('../database/models/Estoque');
 const authenticate = require('../../middlewares/authenticate');
 const router = Router();
 
-router.get('/estoque-produto/:produtoId?', async(req,res)=>{
+router.get('/estoque-produto/:produtoId?', authenticate, async(req,res)=>{
     const produtoId = req.params.produtoId;
 
     if(produtoId){
@@ -31,7 +31,7 @@ router.get('/estoque-produto/:produtoId?', async(req,res)=>{
     }
 })
 
-router.post('/estoque', async(req,res)=>{
+router.post('/estoque',authenticate, async(req,res)=>{
     const {produtoId,valor} = req.body;
     if(!(produtoId && valor)) return res.status(400).json({msg:'Valores inválidos'})
 
@@ -68,7 +68,7 @@ router.put('/estoque/:produtoId', async(req,res)=>{
 
 })
 
-router.delete('/estoque/:produtoId', async(req,res)=>{
+router.delete('/estoque/:produtoId',authenticate, async(req,res)=>{
     const {produtoId} = req.params;
 
     try{

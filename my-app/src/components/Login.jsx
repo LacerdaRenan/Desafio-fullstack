@@ -43,8 +43,8 @@ export default function SignIn() {
     
     axios.post("http://localhost:5000/login", user)
       .then(data=>{
-        console.log(data.data);
-        return navigate('/admin/produtos-')
+        localStorage.setItem('token',"bearer "+data.data.token)
+        return navigate('/admin/produtos');
       })
       .catch(err=>{
         console.log(err);

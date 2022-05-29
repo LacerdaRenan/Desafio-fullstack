@@ -25,7 +25,11 @@ function AdminProdutos(){
     let[posts, setPosts] = useState([]);
  
     useEffect(()=>{
-        axios.get('http://localhost:5000/produto')
+        axios.get('http://localhost:5000/produto',{
+            headers:{
+                authorization: localStorage.getItem('token')
+            }
+        })
         .then(data=>{setPosts(data.data)})
         .catch(err=>{console.log(err)})
     }, []);

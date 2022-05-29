@@ -30,7 +30,7 @@ router.post('/login', async(req,res)=>{
             email: user.email
         }, '12345678', {expiresIn: 600});
 
-        return res.status(202).json(token)
+        return res.status(202).json({token:token})
 
     }catch(err){
         return res.status(500).send(err);
